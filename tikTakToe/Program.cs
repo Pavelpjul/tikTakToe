@@ -1,10 +1,13 @@
-﻿namespace TikTakToe
+﻿using System;
+using System.Windows;
+
+namespace TikTakToe
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            bool won = false;
+            Console.Clear();            
             string[] namePlayers = new string[2];
             Console.Write("Playre one please enter your name :");
             namePlayers[0] = Console.ReadLine();
@@ -16,7 +19,7 @@
                 { "4", "5", "6" },
                 { "7", "8", "9" } };
 
-            while (!won)
+            while (true)
             {
                 DisplayGame(tikTakToe);
                 IfWon(tikTakToe, namePlayers[1]);
@@ -47,17 +50,17 @@
                 || (game[0, 0].Equals(game[1, 1]) && game[1, 1].Equals(game[2, 2]))
                 || (game[0, 2].Equals(game[1, 1]) && game[1, 1].Equals(game[2, 0])))
             {
-                Console.WriteLine($"Player {playerName} Won !!!!");
+                Console.WriteLine($"Player {playerName} Won !!!!\n" +
+                    $"Press any key to restart");
                 Console.ReadLine();
-
+                Main();
             }
-        }
+        }        
         public static int[] ValidChoise(string[,] game, int choise, string namePlayer)
         {
             int[] choiseAdress = { 5, 5 };
             for (int i = 0; i < game.GetLength(0); i++)
             {
-
                 for (int j = 0; j < game.GetLength(1); j++)
                 {
                     if (Convert.ToString(choise) == game[i, j])
